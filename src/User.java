@@ -6,13 +6,14 @@ public class User {
     private long ID;
     private String password;
     private String name;
-    private String role;
+    private Role role;
 
-    public User(long ID, String password, String name, String role) throws IncorrectRoleException {
+
+    public User(long ID, String password, String name, Role role) throws IncorrectRoleException {
         this.ID = ID;
         this.password = password;
         this.name = name;
-        setRole(role);
+        this.role = role;
     }
 
     @Override
@@ -21,6 +22,7 @@ public class User {
                 "ID=" + ID +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 
@@ -36,15 +38,7 @@ public class User {
         return ID;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
-    }
-
-    public void setRole(String role) throws IncorrectRoleException {
-        if (role.equals("ADMIN") || role.equals("USER") || role.equals("BANNED")){
-            this.role = role;
-        } else {
-            throw new IncorrectRoleException("Указана некорректная роль");
-        }
     }
 }

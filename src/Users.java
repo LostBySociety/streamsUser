@@ -11,7 +11,7 @@ public class Users {
         //idUserMap.forEach((k,v) -> System.out.println(k + " " + v))
         Set<Map.Entry<Long,User>> entryUsers = idUserMap.entrySet();
         idAdminMap = entryUsers.stream()
-                .filter(k -> Objects.equals(k.getValue().getRole(), "ADMIN"))
+                .filter(k -> k.getValue().getRole().equals(Role.ADMIN) )
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         idAdminMap.forEach((k,v) -> System.out.println(k + " " + v));
 
@@ -21,3 +21,4 @@ public class Users {
         return idUserMap;
     }
 }
+
