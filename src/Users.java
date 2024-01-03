@@ -27,16 +27,21 @@ public class Users {
                 .filter(k -> k.getValue().getRole().equals(Role.ADMIN))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        if(idUserMap.values().stream().anyMatch(v -> v.getRole().equals(Role.BANNED))) {
-            try {
-                throw new BannedRoleException("Заблокированный пользователь");
-            } catch (BannedRoleException e) {
-                System.out.println("Заблокированный пользователь удален"); // как получить заблокированного пользователя, чтобы вывести его логин?
-                idUserMap.values().removeIf(v -> v.getRole().equals(Role.BANNED));
+        while(!idUserMap.values().stream().allMatch(v -> v.getRole().equals(Role.USER))) {
+            Optional<User> userBanned = idUserMap.values().stream().filter((User v) -> v.getRole().equals(Role.BANNED)).findFirst();
+            Optional<User> userAdmin = idUserMap.values().stream().filter((User v) -> v.getRole().equals(Role.ADMIN)).findFirst();
+            userAdmin.ifPresent(user -> idUserMap.values().remove(user));
+            if(userBanned.isPresent()) {
+                try {
+                    throw new BannedRoleException("Заблокированный пользователь");
+                } catch (BannedRoleException e) {
+                        System.out.printf("Заблокированный пользователь %s удален \n", userBanned.get().getName()); // как получить заблокированного пользователя, чтобы вывести его логин?
+                        idUserMap.values().remove(userBanned.get());
+                }
             }
         }
-        // idAdminMap.forEach((k,v) -> System.out.println(k + " " + v));
-       // idUserMap.forEach((k,v) -> System.out.println(k + " " + v));
+        //idAdminMap.forEach((k,v) -> System.out.println(k + " " + v));
+       idUserMap.forEach((k,v) -> System.out.println(k + " " + v));
     }
 
 

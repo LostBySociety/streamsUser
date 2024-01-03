@@ -10,7 +10,7 @@ public class Main {
                 new User(23432425, "wfqwehwqjkeqke", "13", Role.USER),
                 new User(54546456, "1", "Alexandr", Role.USER),
                 new User(67678688, "@@@@@@@@@@@@@@@@@@@", "Dmitriy", Role.ADMIN),
-                new User(78789789, "wfqwehwqjkeqke", "@@@@@@@@@@@@@@@@@Test", Role.USER),
+                new User(78789789, "wfqwehwqjkeqke", "Test", Role.USER),
                 new User(36546367, "wfqwehwqjkeqke", "Test@@@@@@@@@@@@@@", Role.ADMIN),
                 new User(74587785, "1sadasd", "Test", Role.USER),
                 new User(23454124, "bnjbnkfgbmlfbmg", "John", Role.ADMIN),
